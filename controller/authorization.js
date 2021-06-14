@@ -8,7 +8,7 @@ const requireAuth = (req, res, next) => {
    }
    return client.get(authorization, (err, reply) => {
        if (err || !reply) {
-           return res.status(401).json('Unauthorized')
+           return res.status(401).json('Unauthorized not right')
        }
        return next()
    })
