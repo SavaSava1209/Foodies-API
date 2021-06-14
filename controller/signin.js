@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const redis = require("redis");
 try {
-   const client = redis.createClient(); 
+   const client = redis.createClient(process.env.REDIS_URL); 
 } catch {
     console.log('unable to install redis ')
 }
