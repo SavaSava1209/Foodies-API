@@ -1,1 +1,1 @@
-# Foodies-API
+# foodies-API
