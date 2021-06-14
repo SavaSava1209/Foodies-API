@@ -43,6 +43,6 @@ app.get('/profile/:id', auth.requireAuth, (req, res) => { profile.getProfile(req
 app.post('/profile/:id', auth.requireAuth, (req, res) => { profile.handleProfileUpdate(req, res, db) })
 
 
-app.listen(3001, ()=> {
-    console.log('port is working on 3001')
+app.listen(process.env.PORT, ()=> {
+    console.log('port is working on env')
 })
