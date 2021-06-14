@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-const apiKey = '01f4dc754a6c40bb94aade9f67024130';
+const apiKey = process.env.RECIPES_KEY;
 
 
 
