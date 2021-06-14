@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
 const redis = require("redis");
-const client = redis.createClient();
+try {
+   const client = redis.createClient(); 
+} catch {
+    console.log('unable to install redis ')
+}
+
 
 const handleSignin = (req, res, db, bcrypt, saltRounds) => {
     const { email, password } = req.body;
