@@ -2,13 +2,11 @@
 const handleProfileUpdate = (req, res, db) => {
     const {  username, dob } = req.body.formUpdate
     const { id } = req.params;
-    console.log(username, dob)
-   
     if (!username) {
         return res.status(400).json('incorrect form submitted')
     }
    
-    db('users').where( 'user_id', '=', id ).update({
+    return db('users').where( 'user_id', '=', id ).update({
         username: username,
         dob: dob
     })
