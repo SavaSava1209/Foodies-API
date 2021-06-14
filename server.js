@@ -30,6 +30,7 @@ const app = express()
 app.use(express.json())
 app.use(cors());
 
+app.get('/', (req, res) => {res.send('it is working')})
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt, saltRounds) })
 app.post('/signin', (req, res) => { signin.signinAuthorization(req, res, db, bcrypt, saltRounds) })
 app.post('/image', auth.requireAuth, (req, res) =>  { image.handleApiCall(req, res) });
