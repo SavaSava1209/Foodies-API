@@ -74,6 +74,5 @@ const handleSignin = (req, res, db, bcrypt, saltRounds) => {
 module.exports = {
     signinAuthorization,
     client, 
-    createSession,
-    setToken
+    
 }
