@@ -24,7 +24,9 @@ const handleRegister = (req, res, db, bcrypt, saltRounds) => {
                 .then(user => {
                     return res.json(user[0])
                 })
+                .then(console.log)
             })
+
             .then(trx.commit)
             .catch(trx.rollback)            
          })
