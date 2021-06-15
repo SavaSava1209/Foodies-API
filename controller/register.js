@@ -10,7 +10,7 @@ const handleRegister = (req, res, db, bcrypt, saltRounds) => {
     } 
 
     bcrypt.hash(password, saltRounds, function(err, hash) {
-        return db.transaction( trx => {
+         db.transaction( trx => {
             trx.insert({ 
               email: email, 
               password: hash 
@@ -26,7 +26,7 @@ const handleRegister = (req, res, db, bcrypt, saltRounds) => {
                 .returning('*')
                 .then(user => {    
                     const token = jwt.sign( user[0].email , 'JWT_SECRET', { expiresIn: '10h' });
-                    return res.json(user[0], token)
+                    return res.json(user[0])
                 })
                 .then(console.log)
             })
