@@ -25,8 +25,17 @@ const getProfile = (req, res, db) => {
             .catch(error => Promise.reject('unable to load user'))
 }
 
+const handleRecipesNumber = (req, res, db) => {
+    const { id } = req.params
+    return  db('users').where('user_id', '=', id).decrement('recipes_number', 1)
+            .returning('*')
+            .then(data => res.json(data[0]))               
+            .catch(err => console.log('can not decrease recipe numbers'))
+}
+
 
 module.exports = {
     handleProfileUpdate,
-    getProfile
+    getProfile,
+    handleRecipesNumber
 }
