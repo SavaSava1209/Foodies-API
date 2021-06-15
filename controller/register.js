@@ -25,8 +25,8 @@ const handleRegister = (req, res, db, bcrypt, saltRounds) => {
                 })
                 .returning('*')
                 .then(user => {    
-                   console.log(user[0])
-                   return res.json(user[0])
+                   const token = jwt.sign({ email }, 'JWT_SECRET', { expiresIn: '10h' });
+                   return res.json(user[0], token)
                 })
                 .then(console.log)
             })
