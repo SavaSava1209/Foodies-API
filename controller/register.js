@@ -1,4 +1,7 @@
 
+const jwt = require('jsonwebtoken');
+
+
 const handleRegister = (req, res, db, bcrypt, saltRounds) => {
     const { username, email, password } = req.body
    
@@ -7,7 +10,7 @@ const handleRegister = (req, res, db, bcrypt, saltRounds) => {
     } 
 
     bcrypt.hash(password, saltRounds, function(err, hash) {
-        db.transaction( trx => {
+        return db.transaction( trx => {
             trx.insert({ 
               email: email, 
               password: hash 
@@ -21,8 +24,9 @@ const handleRegister = (req, res, db, bcrypt, saltRounds) => {
                     create_on: new Date()
                 })
                 .returning('*')
-                .then(user => {
-                    return res.json(user[0])
+                .then(user => {    
+                    const token = jwt.sign( user[0].email , 'JWT_SECRET', { expiresIn: '10h' });
+                    return res.json(user[0], token)
                 })
                 .then(console.log)
             })
@@ -33,6 +37,8 @@ const handleRegister = (req, res, db, bcrypt, saltRounds) => {
         .catch(err => res.status(400).json('Unable to register'))
     });
 }
+
+
 
 module.exports = {
     handleRegister,

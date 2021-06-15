@@ -36,7 +36,7 @@ const handleSignin = (req, res, db, bcrypt, saltRounds) => {
 
    const getAuthTokenId = (req, res) => {
        const { authorization } = req.headers;
-  
+          
        return client.get(authorization, (err, reply) => {
            if (err || !reply) {
                return res.status(400).json('Unauthorized')
@@ -59,7 +59,7 @@ const handleSignin = (req, res, db, bcrypt, saltRounds) => {
    };
 
     const signinAuthorization = (req, res, db, bcrypt, saltRounds) => {
-        const   {authorization}   = req.headers;        
+        const  {authorization}   = req.headers;        
         return authorization ? getAuthTokenId(req, res): 
             handleSignin(req, res, db, bcrypt, saltRounds)
             .then(data => {               
@@ -73,5 +73,7 @@ const handleSignin = (req, res, db, bcrypt, saltRounds) => {
 
 module.exports = {
     signinAuthorization,
-    client
+    client, 
+    createSession,
+    setToken
 }
